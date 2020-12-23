@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  exspdasetup:
+    image: exspdasetup
+    build:
+      context: .
+      dockerfile: ./Dockerfile
