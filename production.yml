@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgis:
+    image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-gis:centos8-13.1-3.0-4.5.1
+    container_name: postgis
+    env_file: 
+      - ./devops/postgis.env
+    volumes: 
+      - postgis_data:/pgdata
+    hostname: postgis
+    networks: 
+      - exspda_network
+
+  tileserver:
+    image: pramsey/pg_tileserv:20201218
+    container_name: pg_tileserv
+    env_file: 
+      - ./devops/pg_serv.env
+    hostname: pg_tileserv
+    networks: 
+      - exspda_network
+
+  featureserver:
+    image: pramsey/pg_featureserv:20200408
+    container_name: pg_featureserv
+    env_file: 
+      - ./devops/pg_serv.env
+    hostname: pg_featureserv
+    networks: 
+      - exspda_network
+
+networks: 
+  exspda_network:
+
+volumes: 
+  postgis_data:
+  pgadmin4:

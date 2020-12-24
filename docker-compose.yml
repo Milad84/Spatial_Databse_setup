@@ -8,6 +8,7 @@ services:
       - ./devops/postgis.env
     volumes: 
       - postgis_data:/pgdata
+      - ./local_data/geospatial:/work:Z
     hostname: postgis
     networks: 
       - exspda_network
@@ -21,6 +22,7 @@ services:
       - ./devops/pgadmin.env
     volumes: 
       - pgadmin4:/var/lib/pgadmin
+      - ./local_data/pgadmin4:/var/lib/pgadmin/storage/hippo:Z
     hostname: pgadmin4
     networks: 
       - exspda_network
