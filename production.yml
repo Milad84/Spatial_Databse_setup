@@ -1,6 +1,8 @@
 version: '3.8'
 
 services:
+  # caddy: # build image from Caddy.Dockerfile    
+
   postgis:
     image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-gis:centos8-13.1-3.0-4.5.1
     container_name: postgis
