@@ -11,7 +11,7 @@
 
 #### Instructions
 1. Download this repository
-    1. If you have a Github account, the easiest way to download it is with the following terminal command: git clone https://github.com/chikaj/exspda_setup.git
+    1. If you have a Github account, the easiest way to download it is with the following terminal command: `git clone https://github.com/chikaj/exspda_setup.git`
     2. If you do not have a Github account (consider getting one, or...), go to https://github.com/chikaj/exspda_setup, click the `Code` button and select `Download ZIP`.
 2. Open a terminal, navigate to the downloaded respistory, and run the following Docker command:
     * docker-compose up --build -d
