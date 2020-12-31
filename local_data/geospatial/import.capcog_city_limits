@@ -1,0 +1,4 @@
+1. docker exec -it exspda_postgis sh
+2. cd /work
+3. ls # ensure the Shapefile is located here: capcog_city_limits.shp and accompanying files
+4. shp2pgsql -D -s 2277 /work/capcog_city_limits.shp | psql -h localhost -d hippo -U hippo

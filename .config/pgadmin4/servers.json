@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "PostGIS Server",
+            "Group": "Exploring Spatial Databases",
+            "Host": "exspda_postgis",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "hippo",
+            "SSLMode": "prefer"
+        }
+    }
+}

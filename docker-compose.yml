@@ -3,49 +3,88 @@ version: '3.8'
 services:
   postgis:
     image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-gis:centos8-13.1-3.0-4.5.1
-    container_name: postgis
+    container_name: exspda_postgis
     env_file: 
-      - ./devops/postgis.env
+      - ./.config/postgis.env
     volumes: 
-      - postgis_data:/pgdata
+      - exspda_postgis_data:/pgdata
       - ./local_data/geospatial:/work:Z
-    hostname: postgis
+    hostname: exspda_postgis
     networks: 
       - exspda_network
     ports: 
       - 5555:5432
 
   pgadmin:
-    image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:centos8-13.1-4.5.1
-    container_name: pgadmin4
+    build:
+      context: ./.config/pgadmin4
+    image: exspda_pgadmin4
+    container_name: exspda_pgadmin4
     env_file: 
-      - ./devops/pgadmin.env
+      - ./.config/pgadmin4/pgadmin.env
     volumes: 
-      - pgadmin4:/var/lib/pgadmin
-      - ./local_data/pgadmin4:/var/lib/pgadmin/storage/hippo:Z
-    hostname: pgadmin4
+      - exspda_pgadmin4:/var/lib/pgadmin
+    depends_on:
+      - postgis
+    hostname: exspda_pgadmin4
     networks: 
       - exspda_network
     ports: 
       - 5050:5050
 
+  # tileserver:
+  #   image: pramsey/pg_tileserv:20201218
+  #   container_name: exspda_pg_tileserv
+  #   env_file: 
+  #     - ./.config/pg_serv.env
+  #   depends_on:
+  #     - postgis
+  #   hostname: exspda_pg_tileserv
+  #   networks: 
+  #     - exspda_network
+  #   ports: 
+  #     - 7800:7800
+
+  # featureserver:
+  #   image: pramsey/pg_featureserv:20200408
+  #   container_name: exspda_pg_featureserv
+  #   env_file: 
+  #     - ./.config/pg_serv.env
+  #   depends_on:
+  #     - postgis
+  #   hostname: exspda_pg_featureserv
+  #   networks: 
+  #     - exspda_network
+  #   ports: 
+  #     - 9000:9000
+
   tileserver:
-    image: pramsey/pg_tileserv:20201218
-    container_name: pg_tileserv
+    build: 
+      context: .
+      dockerfile: ./.config/pg_tileserv/Dockerfile
+    image: exspda_pg_tileserv
+    container_name: exspda_pg_tileserv
     env_file: 
-      - ./devops/pg_serv.env
-    hostname: pg_tileserv
+      - ./.config/pg_serv.env
+    depends_on:
+      - postgis
+    hostname: exspda_pg_tileserv
     networks: 
       - exspda_network
     ports: 
       - 7800:7800
 
   featureserver:
-    image: pramsey/pg_featureserv:20200408
-    container_name: pg_featureserv
+    build: 
+      context: .
+      dockerfile: ./.config/pg_featureserv/Dockerfile
+    image: exspda_pg_featureserv
+    container_name: exspda_pg_featureserv
     env_file: 
-      - ./devops/pg_serv.env
-    hostname: pg_featureserv
+      - ./.config/pg_serv.env
+    depends_on:
+      - postgis
+    hostname: exspda_pg_featureserv
     networks: 
       - exspda_network
     ports: 
@@ -55,5 +94,5 @@ networks:
   exspda_network:
 
 volumes: 
-  postgis_data:
-  pgadmin4:
+  exspda_postgis_data:
+  exspda_pgadmin4:

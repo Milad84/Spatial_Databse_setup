@@ -1,4 +1,0 @@
-1. docker exec -it postgis sh
-2. cd /work
-3. ls
-4. shp2pgsql -D -s 2277 /work/capcog_city_limits.shp | psql -h localhost -d hippo -U hippo
