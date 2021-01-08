@@ -4,7 +4,7 @@ services:
   postgis:
     build:
       context: ./.config/postgis 
-    image: exspda_postgis:13-3.0-3.12
+    image: exspda_postgis:nate
     container_name: exspda_postgis
     env_file: 
       - ./.config/postgis/postgis.env 
