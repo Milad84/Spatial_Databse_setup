@@ -7,9 +7,9 @@ services:
     image: exspda_postgis:13-3.0-3.12
     container_name: exspda_postgis
     env_file: 
-      ./.config/postgis/postgis.env 
+      - ./.config/postgis/postgis.env 
     volumes: 
-      - exspda_postgis_data:/var/lib/postgresql/data
+      - exspda_postgis_data:/var/lib/postgresql/data:Z
       - ./local_data/geospatial:/work
     hostname: exspda_postgis
     networks:
@@ -26,7 +26,7 @@ services:
       - ./.config/pgadmin4/pgadmin.env
     volumes: 
       - exspda_pgadmin4:/var/lib/pgadmin
-      - ./local_data/pgadmin:/work
+      # - ./local_data/pgadmin:/work
     depends_on:
       - postgis
     hostname: exspda_pgadmin4
