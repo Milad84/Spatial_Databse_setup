@@ -6,7 +6,7 @@ set -e
 export PGUSER="$POSTGRES_USER"
 
 # Load PostGIS into both template_database and $POSTGRES_DB
-# for DB in template_postgis "$POSTGRES_DB"; do
+echo "Setting up database $POSTGRES_PRIMARY_DB"
 for DB in "$POSTGRES_PRIMARY_DB"; do
 	# echo "Creating Schemas and loading PostGIS extensions into $DB"
 	echo "Creating Schemas in $DB"

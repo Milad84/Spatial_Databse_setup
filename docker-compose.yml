@@ -9,7 +9,7 @@ services:
     env_file: 
       - ./.config/postgis/postgis.env 
     volumes: 
-      - exspda_postgis_data:/var/lib/postgresql/data:Z
+      - exspda_postgis_data:/var/lib/postgresql/data
       - ./local_data/geospatial:/work
     hostname: exspda_postgis
     networks:
@@ -26,7 +26,6 @@ services:
       - ./.config/pgadmin4/pgadmin.env
     volumes: 
       - exspda_pgadmin4:/var/lib/pgadmin
-      # - ./local_data/pgadmin:/work
     depends_on:
       - postgis
     hostname: exspda_pgadmin4

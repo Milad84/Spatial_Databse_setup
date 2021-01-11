@@ -7,9 +7,11 @@ ENV PGROUTING_VERSION 3.1.2
 
 RUN set -ex \
  && apt-get update \
-      && apt-cache showpkg postgresql-plpython3-13 \
-      && apt-get install -y --no-install-recommends \
-           postgresql-plpython3-13 \
+ && apt-cache showpkg postgresql-plpython3-13 \
+ && apt-get install -y --no-install-recommends \
+        postgresql-plpython3-13 \
+#  && apt-get install -y --no-install-recommends \
+#         python3.9 \
  && apt-get install -y \
         libboost-atomic1.67.0 \
         libboost-chrono1.67.0 \
