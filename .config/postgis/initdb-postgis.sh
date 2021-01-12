@@ -10,7 +10,8 @@ echo "Setting up database $POSTGRES_PRIMARY_DB"
 for DB in "$POSTGRES_PRIMARY_DB"; do
 	# echo "Creating Schemas and loading PostGIS extensions into $DB"
 	echo "Creating Schemas in $DB"
-	"${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	# "${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	psql --dbname=hippo --username=hippo <<-'EOSQL'
 		CREATE SCHEMA AUTHORIZATION hippo;
 		CREATE SCHEMA postgis AUTHORIZATION hippo;
 		CREATE SCHEMA topology AUTHORIZATION hippo;
@@ -21,7 +22,8 @@ for DB in "$POSTGRES_PRIMARY_DB"; do
 		CREATE SCHEMA tiger AUTHORIZATION hippo;
 	EOSQL
 	echo "Creating PostGIS extensions in $DB"
-	"${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	# "${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	psql --dbname=hippo --username=hippo <<-'EOSQL'
 		CREATE EXTENSION IF NOT EXISTS postgis SCHEMA postgis;
 		CREATE EXTENSION IF NOT EXISTS postgis_raster SCHEMA postgis;
 		CREATE EXTENSION IF NOT EXISTS postgis_sfcgal SCHEMA postgis;
