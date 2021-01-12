@@ -4,7 +4,7 @@ services:
   postgis:
     build:
       context: ./.config/postgis 
-    image: exspda_postgis:0.1
+    image: exspda_postgis
     container_name: exspda_postgis
     env_file: 
       - ./.config/postgis/postgis.env 

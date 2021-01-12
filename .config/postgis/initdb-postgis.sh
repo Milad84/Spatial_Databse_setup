@@ -35,10 +35,12 @@ for DB in "$POSTGRES_PRIMARY_DB"; do
 		CREATE EXTENSION IF NOT EXISTS plpython3u;
 	EOSQL
 
-	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
+	# "${psql[@]}" --dbname="$DB" <<-'EOSQL'
+	psql --dbname=hippo <<-'EOSQL'
 		ALTER DATABASE hippo SET search_path = hippo, public, postgis, topology, pgrouting, fuzzystrmatch, address_standardizer, address_standardizer_data_us;
 	EOSQL
-	"${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	# "${psql[@]}" --dbname="$DB" --username=hippo <<-'EOSQL'
+	psql --dbname=hippo --username=hippo <<-'EOSQL'
 		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder SCHEMA tiger;
 		ALTER DATABASE hippo SET search_path = hippo, public, postgis, topology, pgrouting, fuzzystrmatch, address_standardizer, address_standardizer_data_us, postgis_tiger_geocoder;
 	EOSQL
