@@ -1,0 +1,43 @@
+LOAD CSV
+   FROM 'AD.txt' WITH ENCODING utf-8
+        HAVING FIELDS
+        (
+            geonameid,name,asciiname,alternatenames,latitude,longitude,feature_class,feature_code,country_code,cc2,admin1_code,admin2_code,admin3_code,admin4_code,population,elevation,dem,timezone,modification_date
+        )
+   INTO postgresql://hippo:datalake@localhost:5432/geonames
+        TARGET TABLE staging.ad
+        TARGET COLUMNS
+        (
+            geonameid,name,asciiname,alternatenames,latitude,longitude,feature_class,feature_code,country_code,cc2,admin1_code,admin2_code,admin3_code,admin4_code,population,elevation,dem,timezone,modification_date
+        )
+   WITH truncate,
+        skip header = 0,
+        fields terminated by '\t'
+         
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB'
+
+BEFORE LOAD DO
+    $$ drop table if exists staging.ad; $$,
+    $$ create table staging.ad (
+        geonameid integer,
+        name varchar(200),
+        asciiname varchar(200),
+        alternatenames varchar(10000),
+        latitude float,
+        longitude float,
+        feature_class char(1),
+        feature_code varchar(10),
+        country_code char(2),
+        cc2 char(5),
+        admin1_code varchar(20),
+        admin2_code varchar(80),
+        admin3_code varchar(20),
+        admin4_code varchar(20),
+        population bigint,
+        elevation integer,
+        dem integer,
+        timezone varchar(40),
+        modification_date text
+    );
+$$;
+

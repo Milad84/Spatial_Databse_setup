@@ -6,6 +6,35 @@ ENV PGROUTING_VERSION 3.1.2
 
 RUN set -ex \
  && apt-get update \
+ && apt-get install  -y --no-install-recommends \
+ build-essential \
+ g++ \
+ sqlite3 \
+ libsqlite3-dev \
+ libtiff5-dev \
+ curl \
+ pkg-config \
+ wget \
+ ca-certificates \
+ unzip
+
+# RUN wget https://download.osgeo.org/proj/proj-7.2.0.tar.gz \
+#  && tar xvzf proj-7.2.0.tar.gz \
+#  && cd proj-7.2.0 \
+#  && ./configure --without-curl \
+#  && make && make install \
+#  && cd ..
+
+# RUN wget download.osgeo.org/gdal/3.0.4/gdal304.zip \
+#  && unzip gdal304.zip \
+#  && cd gdal-3.0.4 \
+#  && ./configure \
+#  && make clean && make && make install \
+#  && export LD_LIBRARY_PATH=/usr/local/lib \
+#  && gdalinfo --version
+
+RUN set -ex \
+ && apt-get update \
 #  && apt-cache showpkg python3 \
  && apt-get install -y --no-install-recommends \
         python3 \
@@ -18,6 +47,9 @@ RUN set -ex \
  && apt-get install -y --no-install-recommends \
         postgresql-13-pgrouting \
         postgresql-13-pgrouting-scripts \
+ && apt-get install -y --no-install-recommends \
+        pgloader \
+        postgresql-13-ogr-fdw \
  && rm -rf /var/lib/apt/lists/*
 RUN echo '#!/bin/bash\n/usr/bin/python3' > /usr/bin/python \
     && chmod +x /usr/bin/python \ 
