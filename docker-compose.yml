@@ -34,6 +34,27 @@ services:
     ports: 
       - 5050:80
 
+  pgloader:
+    # build:
+    #   context: ./.config/pgloader
+    # image: exspda_pgloader
+    image: dimitri/pgloader:latest
+    container_name: exspda_pgloader
+    volumes: 
+      - ./local_data/geospatial:/work
+    hostname: exspda_pgloader
+    networks:
+      - exspda_network
+
+  gdal:
+    image: osgeo/gdal:alpine-small-latest
+    container_name: exspda_gdal
+    volumes: 
+      - ./local_data/geospatial:/work
+    hostname: exspda_gdal
+    networks:
+      - exspda_network
+
   tileserver:
     build: 
       context: .
