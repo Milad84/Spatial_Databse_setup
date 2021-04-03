@@ -36,6 +36,7 @@ services:
 
   pgloader:
     image: dimitri/pgloader:latest
+    working_dir: /work
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     container_name: exspda_pgloader
@@ -47,6 +48,7 @@ services:
 
   gdal:
     image: osgeo/gdal:alpine-small-latest
+    working_dir: /work
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     container_name: exspda_gdal
