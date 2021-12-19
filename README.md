@@ -1,4 +1,4 @@
-# Exploring Spatial Databases
+# Spatial Databases Development
 
 ### Author: Nate Currit 
 ### Geography Department, Texas State University
