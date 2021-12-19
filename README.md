@@ -1,6 +1,6 @@
 # Exploring Spatial Databases
 
-### Nate Currit (The Currit Lab)
+### Author: Nate Currit 
 ### Geography Department, Texas State University
 
 #### Prerequisites
@@ -17,7 +17,7 @@
     1. Open a terminal, navigate to the downloaded respistory, and run the following Docker command:
         1. `docker-compose up --build -d`
             * The above command could be split into 2 commands (`docker-compose build` _and_ `docker-compose up -d`). The -d flag runs the software stack in the background as a daemon
-            * The above command will run the software stack that we will mainly use in the Exploring Spatial Databases course: PostgreSQL with the PostGIS extension, pgAdmin4, pg_featureserv and pg_tileserv
+            * The above command will run the software stack that we will mainly use in the Spatial Database course: PostgreSQL with the PostGIS extension, pgAdmin4, pg_featureserv and pg_tileserv
 3. Stop the software stack by doing the following:
     1. In a terminal, navigate to the downloaded repository, and run the following Docker command:
         1. `docker-compose stop`
